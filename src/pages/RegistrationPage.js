@@ -1,37 +1,37 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { register } from '../redux/auth/authOperations';
 import RegistrationForm from '../components/Main/Form/RegistrationForm';
 
-class RegistrationPage extends Component {
-  state = {
-    name: '',
-    email: '',
-    password: '',
-  };
+export default function RegistrationPage() {
+  const dispatch = useDispatch();
 
-  onHandleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  const [name, setName] = useState('');
+  const updateName = e => setName(e.target.value);
 
-  onHandleSubmit = e => {
+  const [email, setEmail] = useState('');
+  const updateEmail = e => setEmail(e.target.value);
+
+  const [password, setPassword] = useState('');
+  const updatePassword = e => setPassword(e.target.value);
+
+  const onHandleSubmit = e => {
     e.preventDefault();
-    this.props.onRegister(this.state);
-    this.setState({ name: '', email: '', password: '' });
+    dispatch(register({ name, email, password }));
+    setName('');
+    setEmail('');
+    setPassword('');
   };
-  render() {
-    return (
-      <RegistrationForm
-        name={this.state.name}
-        email={this.state.email}
-        password={this.state.password}
-        onHandleSubmit={this.onHandleSubmit}
-        onHandleChange={this.onHandleChange}
-      />
-    );
-  }
+
+  return (
+    <RegistrationForm
+      name={name}
+      email={email}
+      password={password}
+      onUpdateName={updateName}
+      onUpdateEmail={updateEmail}
+      onUpdatePassword={updatePassword}
+      onHandleSubmit={onHandleSubmit}
+    />
+  );
 }
-
-const mapDispatchToProps = { onRegister: register };
-
-export default connect(null, mapDispatchToProps)(RegistrationPage);

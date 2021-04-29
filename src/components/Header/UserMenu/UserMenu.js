@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserName } from '../../../redux/auth/authSelectors';
 import defAvatar from '../../../img/noPhoto.png';
 import {
@@ -9,7 +9,13 @@ import {
 } from './UserMenu.module.scss';
 import { logOut } from '../../../redux/auth/authOperations';
 
-const UserMenu = ({ name, avatar, onLogout }) => {
+const UserMenu = () => {
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    dispatch(logOut());
+  };
+  const name = useSelector(getUserName);
+  const avatar = defAvatar;
   return (
     <div className={userMenuBox}>
       <img src={avatar} alt="avatar" className={userAvatar} />
@@ -21,13 +27,4 @@ const UserMenu = ({ name, avatar, onLogout }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  name: getUserName(state),
-  avatar: defAvatar,
-});
-
-const mapDispatchToProps = {
-  onLogout: logOut,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);
+export default UserMenu;

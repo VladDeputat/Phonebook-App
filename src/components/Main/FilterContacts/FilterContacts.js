@@ -1,11 +1,12 @@
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { filterContacts } from '../../../redux/contacts/contactsActions';
-import { filterSelector } from '../../../redux/contacts/contactsSelectors';
 import styles from './FilterContacts.module.scss';
 
-const FilterContacts = ({ filterContacts }) => {
+export default function FilterContacts() {
+  const dispatch = useDispatch();
+
   const onFilterChange = e => {
-    filterContacts(e.target.value);
+    dispatch(filterContacts(e.target.value));
   };
 
   return (
@@ -24,10 +25,4 @@ const FilterContacts = ({ filterContacts }) => {
       </label>
     </div>
   );
-};
-
-const mapStateToProps = state => {
-  return { filter: filterSelector(state) };
-};
-
-export default connect(mapStateToProps, { filterContacts })(FilterContacts);
+}

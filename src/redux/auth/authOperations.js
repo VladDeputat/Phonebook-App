@@ -34,6 +34,7 @@ const register = data => async dispatch => {
     dispatch(registerSuccess(response.data));
   } catch (error) {
     dispatch(registerError(error.message));
+    alert('Please, enter valid information.');
   }
 };
 
@@ -45,11 +46,12 @@ const logIn = data => async dispatch => {
     dispatch(loginSuccess(response.data));
   } catch (error) {
     dispatch(loginError(error.message));
+    alert('Wrong email or password!');
   }
 };
 
 const logOut = () => async dispatch => {
-  dispatch(logoutRequest());
+  dispatch(logoutRequest);
 
   try {
     await axios.post('/users/logout');
@@ -59,6 +61,7 @@ const logOut = () => async dispatch => {
     dispatch(logoutSuccess());
   } catch (error) {
     dispatch(logoutError(error.message));
+    alert('Error! Please, try again.');
   }
 };
 
@@ -79,6 +82,7 @@ const getCurrentUser = () => async (dispatch, getState) => {
     dispatch(getCurrentUserSuccess(response.data));
   } catch (error) {
     dispatch(getCurrentUserError(error.message));
+    alert('Something went wrong. Please, try again.');
   }
 };
 

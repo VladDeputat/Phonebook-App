@@ -15,13 +15,6 @@ const filtredContactsSelector = createSelector(
   },
 );
 
-// const filtredContactsSelector = state => {
-//   const items = itemsSelector(state);
-//   const normFilter = filterSelector(state).toLowerCase();
-
-//   return items.filter(item => item.name.toLowerCase().includes(normFilter));
-// };
-
 export {
   filterSelector,
   contactsSelector,

@@ -4,8 +4,10 @@ const RegistrationForm = ({
   name,
   email,
   password,
+  onUpdateName,
+  onUpdateEmail,
+  onUpdatePassword,
   onHandleSubmit,
-  onHandleChange,
 }) => {
   return (
     <div className={styles.authFormContainer}>
@@ -21,7 +23,7 @@ const RegistrationForm = ({
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
               required
-              onChange={onHandleChange}
+              onChange={onUpdateName}
               className={styles.input}
             />
           </label>
@@ -32,7 +34,7 @@ const RegistrationForm = ({
               name="email"
               value={email}
               required
-              onChange={onHandleChange}
+              onChange={onUpdateEmail}
               className={styles.input}
             />
           </label>
@@ -43,7 +45,7 @@ const RegistrationForm = ({
               name="password"
               value={password}
               required
-              onChange={onHandleChange}
+              onChange={onUpdatePassword}
               className={styles.input}
             />
           </label>

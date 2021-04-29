@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { isAuth } from '../../../redux/auth/authSelectors';
 import styles from './MainNav.module.scss';
 
 const MainNav = () => {
-  const isAuth = useSelector(state => state.auth.token);
+  const isAuthorised = useSelector(isAuth);
   return (
     <nav>
       <ul className={styles.navList}>
@@ -12,7 +13,7 @@ const MainNav = () => {
             Home
           </NavLink>
         </li>
-        {isAuth && (
+        {isAuthorised && (
           <li className={styles.navItem}>
             <NavLink to="/contacts" activeClassName={styles.activeLink}>
               Contacts

@@ -26,13 +26,6 @@ const token = createReducer(null, {
   [logoutSuccess]: () => null,
 });
 
-// const error = createReducer(null, {
-//   [registerError]: (_, { payload }) => payload,
-//   [loginError]: (_, { payload }) => payload,
-//   [logoutError]: (_, { payload }) => payload,
-//   [getCurrentUserError]: (_, { payload }) => payload,
-// });
-
 const isAuth = createReducer(false, {
   [registerSuccess]: () => true,
   [loginSuccess]: () => true,

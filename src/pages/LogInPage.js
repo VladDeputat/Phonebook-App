@@ -1,36 +1,31 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { logIn } from '../redux/auth/authOperations';
 import LogInForm from '../components/Main/Form/LogInForm';
 
-class LogInPage extends Component {
-  state = {
-    email: '',
-    password: '',
-  };
+export default function LogInPage() {
+  const dispatch = useDispatch();
 
-  onHandleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  const [email, setEmail] = useState('');
+  const updateEmail = e => setEmail(e.target.value);
 
-  onHandleSubmit = e => {
+  const [password, setPassword] = useState('');
+  const updatePassword = e => setPassword(e.target.value);
+
+  const onHandleSubmit = e => {
     e.preventDefault();
-    this.props.onLogin(this.state);
-    this.setState({ email: '', password: '' });
+    dispatch(logIn({ email, password }));
+    setEmail('');
+    setPassword('');
   };
 
-  render() {
-    return (
-      <LogInForm
-        email={this.state.email}
-        password={this.state.password}
-        onHandleSubmit={this.onHandleSubmit}
-        onHandleChange={this.onHandleChange}
-      />
-    );
-  }
+  return (
+    <LogInForm
+      email={email}
+      password={password}
+      onUpdateEmail={updateEmail}
+      onUpdatePassword={updatePassword}
+      onHandleSubmit={onHandleSubmit}
+    />
+  );
 }
-
-const mapDispatchToProps = { onLogin: logIn };
-
-export default connect(null, mapDispatchToProps)(LogInPage);

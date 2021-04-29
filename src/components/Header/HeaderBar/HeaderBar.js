@@ -3,13 +3,14 @@ import AuthMenu from '../AuthMenu/AuthMenu';
 import MainNav from '../MainNav/MainNav';
 import UserMenu from '../UserMenu/UserMenu';
 import { useSelector } from 'react-redux';
+import { isAuth } from '../../../redux/auth/authSelectors';
 
 const HeaderBar = () => {
-  const isAuth = useSelector(state => state.auth.token);
+  const isAuthorised = useSelector(isAuth);
   return (
     <header className={styles.header}>
       <MainNav />
-      {isAuth ? <UserMenu /> : <AuthMenu />}
+      {isAuthorised ? <UserMenu /> : <AuthMenu />}
     </header>
   );
 };

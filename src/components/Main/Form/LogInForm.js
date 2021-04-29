@@ -1,6 +1,12 @@
 import styles from './Form.module.scss';
 
-const LogInForm = ({ onHandleSubmit, email, onHandleChange, password }) => {
+const LogInForm = ({
+  email,
+  password,
+  onUpdateEmail,
+  onUpdatePassword,
+  onHandleSubmit,
+}) => {
   return (
     <div className={styles.authFormContainer}>
       <h1 className={styles.heading}>Please, log in.</h1>
@@ -13,7 +19,7 @@ const LogInForm = ({ onHandleSubmit, email, onHandleChange, password }) => {
               name="email"
               value={email}
               required
-              onChange={onHandleChange}
+              onChange={onUpdateEmail}
               className={styles.input}
             />
           </label>
@@ -25,7 +31,7 @@ const LogInForm = ({ onHandleSubmit, email, onHandleChange, password }) => {
               name="password"
               value={password}
               required
-              onChange={onHandleChange}
+              onChange={onUpdatePassword}
               className={styles.input}
             />
           </label>
